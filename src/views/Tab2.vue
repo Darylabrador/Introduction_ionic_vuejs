@@ -52,7 +52,7 @@
   </ion-page>
 </template>
 
-<script lang="ts">
+<script>
 import {
   IonPage,
   IonHeader,
@@ -87,7 +87,7 @@ export default {
     };
   },
   methods: {
-    closeModal(isOpen: boolean) {
+    closeModal(isOpen) {
       this.blueModal = isOpen;
       this.yellowModal = isOpen;
       this.greenModal = isOpen;
@@ -95,7 +95,7 @@ export default {
       this.colorBtn = "";
       this.dataFromApp = [];
     },
-    openBlueModal(isOpen: boolean) {
+    openBlueModal(isOpen) {
       this.blueModal = isOpen;
       this.colorBtn = "primary";
       this.titleData = "Nuances de bleu";
@@ -110,7 +110,7 @@ export default {
         }
       );
     },
-    openYellowModal(isOpen: boolean) {
+    openYellowModal(isOpen) {
       this.yellowModal = isOpen;
       this.titleData = "Nuances de jaune";
       this.colorBtn = "warning";
@@ -125,7 +125,7 @@ export default {
         }
       );
     },
-    openGreenModal(isOpen: boolean) {
+    openGreenModal(isOpen) {
       this.greenModal = isOpen;
       this.titleData = "Nuances de vert";
       this.colorBtn = "success";
