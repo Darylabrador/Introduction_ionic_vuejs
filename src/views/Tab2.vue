@@ -2,27 +2,155 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Tab 2</ion-title>
+        <ion-title>Mes couleurs</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Tab 2</ion-title>
+          <ion-title size="large">Mes couleurs</ion-title>
         </ion-toolbar>
       </ion-header>
-      
-      <ExploreContainer name="Tab 2 page" />
+
+      <div id="container">
+        <ion-button @click="openBlueModal(true)"> Les teintes bleu </ion-button>
+        <ion-button color="warning" @click="openYellowModal(true)"
+          >Les teintes jaune
+        </ion-button>
+        <ion-button color="success" @click="openGreenModal(true)"
+          >Les teintes verte
+        </ion-button>
+      </div>
+
+      <ion-modal :is-open="blueModal" @onDidDismiss="closeModal(false)">
+        <Modal
+          @close="closeModal"
+          :title="titleData"
+          :dataFromApp="dataFromApp"
+          :colorBtn="colorBtn"
+        ></Modal>
+      </ion-modal>
+
+      <ion-modal :is-open="yellowModal" @onDidDismiss="closeModal(false)">
+        <Modal
+          @close="closeModal"
+          :title="titleData"
+          :dataFromApp="dataFromApp"
+          :colorBtn="colorBtn"
+        ></Modal>
+      </ion-modal>
+
+      <ion-modal :is-open="greenModal" @onDidDismiss="closeModal(false)">
+        <Modal
+          @close="closeModal"
+          :title="titleData"
+          :dataFromApp="dataFromApp"
+          :colorBtn="colorBtn"
+        ></Modal>
+      </ion-modal>
     </ion-content>
   </ion-page>
 </template>
 
 <script lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-import ExploreContainer from '@/components/ExploreContainer.vue';
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonButton,
+  IonModal,
+} from "@ionic/vue";
+import Modal from "@/components/modal/Modal.vue";
 
-export default  {
-  name: 'Tab2',
-  components: { ExploreContainer, IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
-}
+export default {
+  name: "Tab2",
+  components: {
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonPage,
+    Modal,
+    IonButton,
+    IonModal,
+  },
+  data() {
+    return {
+      blueModal: false,
+      yellowModal: false,
+      greenModal: false,
+      titleData: "",
+      dataFromApp: [],
+      colorBtn: "",
+    };
+  },
+  methods: {
+    closeModal(isOpen: boolean) {
+      this.blueModal = isOpen;
+      this.yellowModal = isOpen;
+      this.greenModal = isOpen;
+      this.titleData = "";
+      this.colorBtn = "";
+      this.dataFromApp = [];
+    },
+    openBlueModal(isOpen: boolean) {
+      this.blueModal = isOpen;
+      this.colorBtn = "primary";
+      this.titleData = "Nuances de bleu";
+      this.dataFromApp.push(
+        {
+          color: "Cyan",
+          hex: "#00BCD4",
+        },
+        {
+          color: "Indigo",
+          hex: "#3F51B5",
+        }
+      );
+    },
+    openYellowModal(isOpen: boolean) {
+      this.yellowModal = isOpen;
+      this.titleData = "Nuances de jaune";
+      this.colorBtn = "warning";
+      this.dataFromApp.push(
+        {
+          color: "Jaune",
+          hex: "#FFEB3B",
+        },
+        {
+          color: "Jaune foncé",
+          hex: "#FBC02D",
+        }
+      );
+    },
+    openGreenModal(isOpen: boolean) {
+      this.greenModal = isOpen;
+      this.titleData = "Nuances de vert";
+      this.colorBtn = "success";
+      this.dataFromApp.push(
+        {
+          color: "Vert",
+          hex: "#4CAF50",
+        },
+        {
+          color: "Vert pomme",
+          hex: "#66BB6A",
+        }
+      );
+    },
+  },
+};
 </script>
+
+<style scoped>
+#container {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+</style>
